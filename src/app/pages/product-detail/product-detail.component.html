@@ -1,0 +1,20 @@
+<div class=" w-full ">
+  <div class="flex justify-center">
+    <div class="w-full max-w-[1440px] flex mt-6">
+      <div class="w-6/12 ">
+        <img class="rounded-lg shadow-xl" [src]="product?.image" alt="" srcset="">
+      </div>
+      <div class="w-6/12 ">
+        <app-detail [product]="product"/>
+      </div>
+    </div>
+  </div>
+  <div class="pt-4">
+    <app-overviews [productName]="product?.name"/>
+  </div>
+  <div class="pt-4">
+    <app-comments/>
+  </div>
+</div>
+
+

@@ -1,0 +1,115 @@
+<div class="ml-10 pr-5 h-full pb-5" *ngIf="product">
+  <div class="flex flex-col justify-between h-full">
+
+    <div class="">
+      <!-- Product Name and Description -->
+      <div class="mb-5">
+        <div class="text-5xl text-main font-heading_bold">{{ product.name }}</div>
+        <div class="my-2 text-gray-500 text-sm">
+          <span>{{ product.description }}</span>
+        </div>
+      </div>
+
+      <!-- Price and Discount -->
+      <div class="flex items-center my-5 w-full">
+        <div class="text-xl font-bold text-main ">
+          ${{ product.price?.toFixed(2) }}
+        </div>
+        <div class="text-gray-500 line-through mx-3 text-sm">${{ product.price.toFixed(2) }}</div>
+        <div class="whitespace-nowrap bg-red-100 text-red-600 px-2 py-1 rounded text-sm">
+          SAVE 20%
+        </div>
+      </div>
+
+      <!-- Quantity and Add to Cart -->
+      <div class="flex gap-x-6 my-6">
+        <div class="flex items-center">
+          <div
+            class="flex items-center border border-black justify-between max-w-[100px] px-3 rounded-md hover:border-[#fadc6f]">
+            <button type="button" (click)="adjustQuantity('-')"
+                    class="text-sm leading-8 text-gray-600 transition hover:opacity-75">−
+            </button>
+            <input id="quantityInput" type="number" [(ngModel)]="quantity" min="1" max="20"
+                   class=" h-12 w-16 border-transparent text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none "/>
+            <button type="button" (click)="adjustQuantity('+')"
+                    class="text-sm leading-8 text-gray-600 transition hover:opacity-75">+
+            </button>
+          </div>
+        </div>
+        <div class="flex w-full items-center">
+          <div class="w-full">
+            <button type="submit"
+                    class="h-[45px] w-full flex justify-center items-center bg-[#00205c] hover:border-[#00205c] hover:border-2 hover:bg-[#FADC6F] group transition-all duration-200 rounded-md">
+              <p class="text-white group-hover:text-main text-sm">Add To Cart</p>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="">
+      <!-- Description Toggle -->
+      <div class="w-full py-2 border-t-2 border-[#ccccc]">
+        <div class="py-1">
+          <div class="flex w-full px-2">
+            <div class="flex justify-between items-center w-full cursor-pointer" (click)="toggleSection('description')">
+              <div class="font-medium text-lg text-gray-600 flex">
+            <span class="pr-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
+                   fill="rgba(75,85,99,1)">
+                <path
+                  d="M5.99805 3C9.48787 3 12.3812 5.55379 12.9112 8.8945C14.0863 7.72389 15.7076 7 17.498 7H21.998V9.5C21.998 13.0899 19.0879 16 15.498 16H12.998V21H10.998V13H8.99805C5.13205 13 1.99805 9.86599 1.99805 6V3H5.99805ZM19.998 9H17.498C15.0128 9 12.998 11.0147 12.998 13.5V14H15.498C17.9833 14 19.998 11.9853 19.998 9.5V9ZM5.99805 5H3.99805V6C3.99805 8.76142 6.23662 11 8.99805 11H10.998V10C10.998 7.23858 8.75947 5 5.99805 5Z"></path>
+              </svg>
+            </span>
+                <p>Description</p>
+              </div>
+              <div [ngClass]="{'rotate-180': isVisible.description, 'rotate-0': !isVisible.description}"
+                   class="transition-transform duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
+                     fill="rgba(75,85,99,1)">
+                  <path
+                    d="M11.9999 10.8284L7.0502 15.7782L5.63599 14.364L11.9999 8L18.3639 14.364L16.9497 15.7782L11.9999 10.8284Z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="mt-1 px-2 font-medium transition-all duration-300 ease-in-out" *ngIf="isVisible.description">
+            <p>{{ product.description }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full py-2 border-t-2 border-[#ccccc]">
+        <div class="py-1">
+          <div class="flex w-full px-2">
+            <div class="flex justify-between items-center w-full cursor-pointer" (click)="toggleSection('productUseGuide')">
+              <div class=" font-medium text-lg text-gray-600 flex">
+            <span class="pr-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
+                   fill="rgba(75,85,99,1)">
+                <path
+                  d="M5.99805 3C9.48787 3 12.3812 5.55379 12.9112 8.8945C14.0863 7.72389 15.7076 7 17.498 7H21.998V9.5C21.998 13.0899 19.0879 16 15.498 16H12.998V21H10.998V13H8.99805C5.13205 13 1.99805 9.86599 1.99805 6V3H5.99805ZM19.998 9H17.498C15.0128 9 12.998 11.0147 12.998 13.5V14H15.498C17.9833 14 19.998 11.9853 19.998 9.5V9ZM5.99805 5H3.99805V6C3.99805 8.76142 6.23662 11 8.99805 11H10.998V10C10.998 7.23858 8.75947 5 5.99805 5Z"></path>
+              </svg>
+            </span>
+                <p>Product Ingredient</p>
+              </div>
+              <div [ngClass]="{'rotate-180': isVisible.productUseGuide, 'rotate-0': !isVisible.productUseGuide}"
+                   class="transition-transform duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
+                     fill="rgba(75,85,99,1)">
+                  <path
+                    d="M11.9999 10.8284L7.0502 15.7782L5.63599 14.364L11.9999 8L18.3639 14.364L16.9497 15.7782L11.9999 10.8284Z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="px-2 mt-1 font-medium transition-all duration-300 ease-in-out" *ngIf="isVisible.productUseGuide">
+            <p>{{ product.ingredient }}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
